@@ -1,20 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonicModule } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth';
+import { MissionService } from '../mision-service';
+import { NinjaStats } from '../interfaces';
 
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.page.html',
-  styleUrls: ['./perfil.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule]
 })
 export class PerfilPage implements OnInit {
+  stats: NinjaStats | null = null;
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private missionService: MissionService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
+    this.loadStats();
   }
 
+  loadStats() {
+    this.missionService.getStats().subscribe(res => {
+      this.stats = res;
+    });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 }

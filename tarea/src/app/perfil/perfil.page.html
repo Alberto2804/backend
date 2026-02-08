@@ -1,13 +1,40 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>perfil</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/misiones"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Expediente Ninja</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">perfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding ion-text-center" *ngIf="stats">
+  
+  <ion-avatar style="width: 100px; height: 100px; margin: 20px auto;">
+    <img [src]="stats.profile.avatar" />
+  </ion-avatar>
+
+  <h2>{{ stats.profile.username }}</h2>
+  <ion-badge color="warning">{{ stats.profile.rank }}</ion-badge>
+
+  <ion-grid class="ion-margin-top">
+    <ion-row>
+      <ion-col>
+        <div class="stat-box">
+          <h1>{{ stats.profile.experience }}</h1>
+          <p>XP Total</p>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="stat-box">
+          <h1>{{ stats.stats.completedMissions }}</h1>
+          <p>Misiones Cumplidas</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-button color="danger" expand="block" class="ion-margin-top" (click)="logout()">
+    Cerrar Sesión
+  </ion-button>
+
 </ion-content>

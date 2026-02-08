@@ -1,41 +1,33 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
   {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-  },
-  {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {
     path: 'login',
-    loadComponent: () => import('./pages/login/login.page').then( m => m.LoginPage)
-  },
-  {
-    path: 'register',
-    loadComponent: () => import('./pag/register/register.page').then( m => m.RegisterPage)
-  },
-  {
-    path: 'login',
-    loadComponent: () => import('./login/login.page').then( m => m.LoginPage)
+    loadComponent: () => import('./login/login.page').then(m => m.LoginPage),
   },
   {
     path: 'registro',
-    loadComponent: () => import('./registro/registro.page').then( m => m.RegistroPage)
+    loadComponent: () => import('./registro/registro.page').then(m => m.RegistroPage),
   },
   {
     path: 'misiones',
-    loadComponent: () => import('./misiones/misiones.page').then( m => m.MisionesPage)
+    loadComponent: () => import('./misiones/misiones.page').then(m => m.MisionesPage),
+    canActivate: [AuthGuard]
   },
   {
     path: 'perfil',
-    loadComponent: () => import('./perfil/perfil.page').then( m => m.PerfilPage)
+    loadComponent: () => import('./perfil/perfil.page').then(m => m.PerfilPage),
+    canActivate: [AuthGuard] 
   },
   {
     path: 'detalle-mision',
-    loadComponent: () => import('./detalle-mision/detalle-mision.page').then( m => m.DetalleMisionPage)
+    loadComponent: () => import('./detalle-mision/detalle-mision.page').then(m => m.DetalleMisionPage),
+    canActivate: [AuthGuard] 
   },
 ];

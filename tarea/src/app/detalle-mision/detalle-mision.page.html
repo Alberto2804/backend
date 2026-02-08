@@ -1,13 +1,31 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>detalle-mision</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Reporte de Misión</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">detalle-mision</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <h3>Informe Final</h3>
+  <p class="small">Completa los datos para recibir tu recompensa.</p>
+
+  <ion-item>
+    <ion-label position="stacked">Descripción del éxito</ion-label>
+    <ion-textarea [(ngModel)]="reportText" placeholder="¿Cómo completaste la misión?"></ion-textarea>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Prueba visual (URL)</ion-label>
+    <ion-input [(ngModel)]="evidenceUrl"></ion-input>
+  </ion-item>
+
+  <ion-card *ngIf="evidenceUrl">
+    <img [src]="evidenceUrl" alt="Evidencia" />
+  </ion-card>
+
+  <ion-button expand="block" (click)="sendReport()" [disabled]="!reportText">
+    Enviar Reporte
+  </ion-button>
 </ion-content>

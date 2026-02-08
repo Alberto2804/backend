@@ -1,18 +1,12 @@
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { Component } from '@angular/core';
+import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 
-@NgModule({
-  // ...
-  imports: [
-    BrowserModule, 
-    IonicModule.forRoot(), 
-    AppRoutingModule,
-    HttpClientModule // <--- IMPORTANTE
-  ],
-  providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true } // <--- Registrar Interceptor
-  ],
-  // ...
+@Component({
+  selector: 'app-root',
+  templateUrl: 'app.component.html',
+  standalone: true, 
+  imports: [IonApp, IonRouterOutlet],
 })
-export class App {}
+export class AppComponent {
+  constructor() {}
+}

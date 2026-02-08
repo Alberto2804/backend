@@ -1,13 +1,59 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>misiones</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Misiones Konoha</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/perfil">
+        <ion-icon name="person-circle-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-segment [(ngModel)]="segmentValue" (ionChange)="filterMissions()">
+      <ion-segment-button value="DISPONIBLE">Libres</ion-segment-button>
+      <ion-segment-button value="EN_CURSO">En Curso</ion-segment-button>
+      <ion-segment-button value="COMPLETADA">Historial</ion-segment-button>
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">misiones</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  
+  <ion-list>
+    <ion-card *ngFor="let m of filteredMissions">
+      <ion-card-header>
+        <ion-card-subtitle>
+          <ion-badge [color]="m.rankRequirement === 'S' ? 'danger' : 'medium'">
+            Rango {{ m.rankRequirement }}
+          </ion-badge>
+          <span style="float: right;">💰 {{ m.reward }} Ryō</span>
+        </ion-card-subtitle>
+        <ion-card-title>{{ m.title }}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p>{{ m.description }}</p>
+        
+        <ion-button *ngIf="m.status === 'DISPONIBLE'" 
+                    expand="block" 
+                    class="ion-margin-top"
+                    (click)="accept(m)">
+          Aceptar Misión
+        </ion-button>
+
+        <ion-button *ngIf="m.status === 'EN_CURSO'" 
+                    expand="block" 
+                    color="secondary"
+                    class="ion-margin-top"
+                    routerLink="/detalle-mision"
+                    [queryParams]="{ id: m.id }">
+          Reportar Avance
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <div *ngIf="filteredMissions.length === 0" class="ion-text-center ion-padding">
+    <p>No hay misiones en esta categoría.</p>
+  </div>
+
 </ion-content>

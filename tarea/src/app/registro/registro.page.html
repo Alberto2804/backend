@@ -1,13 +1,30 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>registro</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding">
+  <h1>Nuevo Registro</h1>
+  
+  <ion-item>
+    <ion-label position="floating">Nombre Ninja</ion-label>
+    <ion-input [(ngModel)]="data.username"></ion-input>
+  </ion-item>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">registro</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-item>
+    <ion-label position="floating">Contraseña</ion-label>
+    <ion-input type="password" [(ngModel)]="data.password"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Rango Inicial</ion-label>
+    <ion-select [(ngModel)]="data.rank">
+      <ion-select-option value="Genin">Genin</ion-select-option>
+      <ion-select-option value="Chunin">Chunin</ion-select-option>
+      <ion-select-option value="Jonin">Jonin</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button expand="block" class="ion-margin-top" (click)="register()">
+    Unirse a Konoha
+  </ion-button>
+  
+  <ion-button expand="block" fill="clear" routerLink="/login">
+    Volver al Login
+  </ion-button>
 </ion-content>
