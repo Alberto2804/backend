@@ -1,2 +1,22 @@
-// For information on how to create your own theme, please refer to:
-// https://ionicframework.com/docs/theming/
+/* Konoha Dark Theme Variables */
+:root {
+  --ion-color-primary: #ff9900;          /* Naranja Naruto */
+  --ion-color-primary-rgb: 255, 153, 0;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-shade: #e08600;
+  --ion-color-primary-tint: #ffa31a;
+
+  --ion-color-secondary: #00a8ff;        /* Azul Chakra */
+  --ion-color-secondary-rgb: 0, 168, 255;
+  
+  --ion-color-danger: #e74c3c;           /* Rojo Sangre */
+
+  /* Fondo Oscuro Profundo (Estilo Pergamino Oscuro) */
+  --ion-background-color: #121212;
+  --ion-background-color-rgb: 18, 18, 18;
+  --ion-text-color: #ffffff;
+  
+  --ion-card-background: #1e1e1e;
+  --ion-item-background: #1e1e1e;
+  --ion-border-color: #333333;
+}

@@ -1,0 +1,60 @@
+.bg-pattern {
+  --background: #181818;
+}
+
+.mission-card {
+  background: #252525;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.card-left-border {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  /* Colores dinámicos por rango en el borde izquierdo */
+  &.rank-S { background: #8e44ad; }
+  &.rank-A { background: #c0392b; }
+  &.rank-B { background: #2980b9; }
+  &.rank-C { background: #27ae60; }
+  &.rank-D { background: #7f8c8d; }
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.reward {
+  color: #f1c40f; /* Dorado */
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.description {
+  color: #aaaaaa;
+  margin-top: 8px;
+}
+
+.status-indicator {
+  margin-top: 12px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: right;
+  opacity: 0.7;
+}
+
+.empty-state {
+  text-align: center;
+  margin-top: 50px;
+  color: #555;
+  ion-icon { font-size: 64px; margin-bottom: 10px; }
+}

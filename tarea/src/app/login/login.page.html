@@ -1,24 +1,33 @@
-<ion-content class="ion-padding ion-text-center">
-  <div style="margin-top: 50px;">
-    <h1>🥷 Konoha ID</h1>
-    <p>Identifícate, Shinobi</p>
+<ion-content class="bg-ninja">
+  <div class="center-container">
+    <div class="logo-box">
+      <h1>🍃</h1>
+      <h2>KONOHA ID</h2>
+    </div>
+
+    <ion-card class="login-card">
+      <ion-card-content>
+        <ion-item lines="none" class="input-item">
+          <ion-icon name="person" slot="start" color="primary"></ion-icon>
+          <ion-input placeholder="Nombre Ninja" [(ngModel)]="credentials.username"></ion-input>
+        </ion-item>
+
+        <ion-item lines="none" class="input-item">
+          <ion-icon name="lock-closed" slot="start" color="primary"></ion-icon>
+          <ion-input type="password" placeholder="Contraseña Secreta" [(ngModel)]="credentials.password"></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" class="btn-konoha ion-margin-top" (click)="login()">
+          Entrar a la Aldea
+        </ion-button>
+
+        <div class="footer-links">
+          <p>¿Aspirante nuevo?</p>
+          <ion-button fill="clear" size="small" routerLink="/registro" color="secondary">
+            Registrar Matrícula
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
   </div>
-
-  <ion-item class="ion-margin-top">
-    <ion-label position="floating">Usuario</ion-label>
-    <ion-input [(ngModel)]="credentials.username"></ion-input>
-  </ion-item>
-
-  <ion-item class="ion-margin-top">
-    <ion-label position="floating">Contraseña</ion-label>
-    <ion-input type="password" [(ngModel)]="credentials.password"></ion-input>
-  </ion-item>
-
-  <ion-button expand="block" class="ion-margin-top" (click)="login()">
-    Entrar
-  </ion-button>
-
-  <p class="ion-margin-top">
-    ¿Nuevo en la aldea? <a routerLink="/registro">Regístrate aquí</a>
-  </p>
 </ion-content>

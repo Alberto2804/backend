@@ -1,31 +1,78 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button defaultHref="/misiones"></ion-back-button>
     </ion-buttons>
-    <ion-title>Reporte de Misión</ion-title>
+    <ion-title>Pergamino de Misión</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <h3>Informe Final</h3>
-  <p class="small">Completa los datos para recibir tu recompensa.</p>
+  
+  <div class="mission-header">
+    <ion-badge [class]="'badge-rank-' + mission.rank" class="rank-badge-large">RANGO {{ mission.rank }}</ion-badge>
+    <h1>{{ mission.title }}</h1>
+    <h2 class="reward-large">Recompensa: 💰 {{ mission.reward }}</h2>
+  </div>
 
-  <ion-item>
-    <ion-label position="stacked">Descripción del éxito</ion-label>
-    <ion-textarea [(ngModel)]="reportText" placeholder="¿Cómo completaste la misión?"></ion-textarea>
-  </ion-item>
+  <div class="divider"></div>
 
-  <ion-item>
-    <ion-label position="stacked">Prueba visual (URL)</ion-label>
-    <ion-input [(ngModel)]="evidenceUrl"></ion-input>
-  </ion-item>
+  <div class="mission-body">
+    <h3>📜 Descripción</h3>
+    <p>{{ mission.desc }}</p>
+  </div>
 
-  <ion-card *ngIf="evidenceUrl">
-    <img [src]="evidenceUrl" alt="Evidencia" />
-  </ion-card>
+  <div class="action-zone">
 
-  <ion-button expand="block" (click)="sendReport()" [disabled]="!reportText">
-    Enviar Reporte
-  </ion-button>
+    <div *ngIf="mission.status === 'DISPONIBLE'">
+      <ion-note color="medium" class="ion-text-center block">
+        ¿Aceptas el desafío? Una vez aceptada, no puedes cancelarla.
+      </ion-note>
+      <ion-button expand="block" color="success" class="btn-konoha ion-margin-top" (click)="accept()">
+        <ion-icon name="checkmark-circle" slot="start"></ion-icon>
+        Aceptar Misión
+      </ion-button>
+    </div>
+
+   <div *ngIf="mission.status === 'EN_CURSO'">
+      <h3>📝 Informe de Misión</h3>
+      
+      <ion-item class="input-dark">
+        <ion-label position="stacked">Reporte de Sucesos</ion-label>
+        <ion-textarea rows="4" placeholder="Describe cómo lo lograste..." [(ngModel)]="reportText"></ion-textarea>
+      </ion-item>
+      
+      <div class="photo-section ion-margin-top">
+        <ion-label color="medium" style="display:block; margin-bottom: 8px;">Prueba Visual (Evidencia)</ion-label>
+        
+        <div *ngIf="!evidenceUrl" class="photo-placeholder" (click)="takePicture()">
+          <ion-icon name="camera" color="primary"></ion-icon>
+          <p>Tocar para añadir foto</p>
+        </div>
+
+        <div *ngIf="evidenceUrl" class="photo-preview">
+          <img [src]="evidenceUrl" alt="Evidencia" />
+          <ion-button fill="clear" color="danger" size="small" (click)="evidenceUrl = ''">
+            <ion-icon name="trash" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+
+      <ion-button expand="block" 
+                  color="secondary" 
+                  class="btn-konoha ion-margin-top" 
+                  (click)="sendReport()"
+                  [disabled]="!reportText || !evidenceUrl">
+        <ion-icon name="paper-plane" slot="start"></ion-icon>
+        Enviar Reporte
+      </ion-button>
+    </div>
+
+    <div *ngIf="mission.status === 'COMPLETADA'" class="completed-stamp">
+      <ion-icon name="trophy" color="warning"></ion-icon>
+      <h2>MISIÓN CUMPLIDA</h2>
+      <p>La XP y los Ryō han sido añadidos a tu perfil.</p>
+    </div>
+
+  </div>
 </ion-content>

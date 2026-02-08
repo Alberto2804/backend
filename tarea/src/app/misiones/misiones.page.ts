@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule, ToastController } from '@ionic/angular';
+import { IonicModule, ToastController, NavController } from '@ionic/angular'; 
 import { RouterModule } from '@angular/router'; 
 
 import { MissionService } from '../mision-service';
 import { AuthService } from '../auth';
 import { Mission } from '../interfaces';
-
 @Component({
   selector: 'app-misiones',
   templateUrl: './misiones.page.html',
@@ -18,20 +17,23 @@ import { Mission } from '../interfaces';
 export class MisionesPage implements OnInit {
   missions: Mission[] = [];
   filteredMissions: Mission[] = [];
-  segmentValue = 'DISPONIBLE';
-  myRank: string = '';
+  segmentValue = 'DISPONIBLE'; 
+  myRank: string = 'Genin';
 
   constructor(
     private missionService: MissionService,
     private authService: AuthService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private navCtrl: NavController
   ) {}
 
-  async ngOnInit() {
+  ngOnInit() {
+    
     this.myRank = this.authService.getRank(); 
   }
 
   ionViewWillEnter() {
+    
     this.loadMissions();
   }
 
@@ -39,17 +41,19 @@ export class MisionesPage implements OnInit {
     this.missionService.getMissions().subscribe({
       next: (res) => {
         this.missions = res.data;
-        this.filterMissions();
+        this.filterMissions(); 
       },
-      error: (err) => console.error(err)
+      error: (err) => console.error('Error cargando misiones', err)
     });
   }
 
+  
   filterMissions() {
     this.filteredMissions = this.missions.filter(m => m.status === this.segmentValue);
   }
 
-  async accept(mission: Mission) {
+  
+  accept(mission: Mission) {
     if (this.myRank === 'Genin' && mission.rankRequirement === 'S') {
       this.showToast('¡Te falta odio (y rango) para esta misión!', 'danger');
       return;
@@ -58,10 +62,24 @@ export class MisionesPage implements OnInit {
     this.missionService.acceptMission(mission.id).subscribe({
       next: () => {
         this.showToast('Misión aceptada. ¡Dattebayo!', 'success');
-        this.loadMissions(); 
+        this.loadMissions();
       },
       error: (err) => {
         this.showToast(err.error.message || 'Error al aceptar', 'danger');
+      }
+    });
+  }
+
+  
+  goToDetail(mission: any) {
+    this.navCtrl.navigateForward('/detalle-mision', {
+      queryParams: {
+        id: mission.id,
+        title: mission.title,
+        desc: mission.description,
+        rank: mission.rankRequirement,
+        reward: mission.reward,
+        status: mission.status
       }
     });
   }

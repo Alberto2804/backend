@@ -7,7 +7,7 @@ import { provideHttpClient, withInterceptorsFromDi, HTTP_INTERCEPTORS } from '@a
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 import { JwtInterceptor } from './app/interceptor/jwt.interceptor';
-
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
 bootstrapApplication(AppComponent, {
   providers: [
 
@@ -20,3 +20,4 @@ bootstrapApplication(AppComponent, {
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true } 
   ]
 });
+defineCustomElements(window);

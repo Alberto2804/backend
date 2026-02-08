@@ -1,0 +1,39 @@
+.bg-ninja {
+  --background: url('https://wallpapers.com/images/hd/naruto-black-and-white-phone-h5694u94u94.jpg') no-repeat center center / cover;
+}
+/* Capa oscura para leer bien */
+.bg-ninja::part(background) {
+  filter: brightness(0.4);
+}
+
+.center-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.logo-box {
+  text-align: center;
+  margin-bottom: 20px;
+  h1 { font-size: 4rem; margin: 0; filter: drop-shadow(0 0 10px #ff9900); }
+  h2 { color: white; margin: 0; letter-spacing: 2px; }
+}
+
+.login-card {
+  width: 100%;
+  border-radius: 16px;
+  background: rgba(30, 30, 30, 0.95); /* Semi transparente */
+  border: 1px solid var(--ion-color-primary);
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.input-item {
+  background: #121212;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  --padding-start: 10px;
+  border: 1px solid #333;
+}
