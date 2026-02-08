@@ -1,15 +1,25 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar color="primary">
-    <ion-title>Tablón de Misiones</ion-title>
+  <ion-toolbar color="primary" class="header-konoha">
+    <ion-title>Misiones Konoha</ion-title>
+    
     <ion-buttons slot="end">
-      <ion-button routerLink="/perfil">
-        <ion-icon slot="icon-only" name="person-circle"></ion-icon>
-      </ion-button>
+      <div class="profile-avatar-btn" routerLink="/perfil">
+        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Naruto" alt="Perfil">
+      </div>
     </ion-buttons>
   </ion-toolbar>
 
-  <ion-toolbar color="dark">
-    <ion-segment [(ngModel)]="segmentValue" (ionChange)="filterMissions()" mode="md">
+  <ion-toolbar color="dark" class="search-toolbar">
+    <ion-searchbar placeholder="Buscar misión..." 
+                   [(ngModel)]="searchText"
+                   (ionInput)="filterMissions()"
+                   animated="true"
+                   showCancelButton="focus">
+    </ion-searchbar>
+  </ion-toolbar>
+
+  <ion-toolbar color="dark" class="segment-toolbar">
+    <ion-segment [(ngModel)]="segmentValue" (ionChange)="filterMissions()" mode="md" scrollable="true">
       <ion-segment-button value="DISPONIBLE">
         <ion-label>Disponibles</ion-label>
       </ion-segment-button>

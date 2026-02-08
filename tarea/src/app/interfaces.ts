@@ -14,6 +14,7 @@ export interface Mission {
   reward: number;
   status: 'DISPONIBLE' | 'EN_CURSO' | 'COMPLETADA';
   acceptedByNinjaName?: string;
+ 
 }
 
 export interface AuthResponse {

@@ -1,40 +1,49 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/misiones"></ion-back-button>
+      <ion-back-button defaultHref="/misiones" text=""></ion-back-button>
     </ion-buttons>
     <ion-title>Expediente Ninja</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding ion-text-center" *ngIf="stats">
+<ion-content class="bg-pattern" *ngIf="stats">
   
-  <ion-avatar style="width: 100px; height: 100px; margin: 20px auto;">
-    <img [src]="stats.profile.avatar" />
-  </ion-avatar>
+  <div class="profile-header">
+    <div class="avatar-container">
+      <img [src]="stats.profile.avatar" alt="Avatar">
+    </div>
+    <h2>{{ stats.profile.username }}</h2>
+    <ion-badge [class]="'badge-rank-' + stats.profile.rank" class="rank-badge-large">
+      {{ stats.profile.rank }}
+    </ion-badge>
+  </div>
 
-  <h2>{{ stats.profile.username }}</h2>
-  <ion-badge color="warning">{{ stats.profile.rank }}</ion-badge>
-
-  <ion-grid class="ion-margin-top">
+  <ion-grid class="stats-grid">
     <ion-row>
-      <ion-col>
+      <ion-col size="6">
         <div class="stat-box">
+          <ion-icon name="flash" color="warning"></ion-icon>
           <h1>{{ stats.profile.experience }}</h1>
           <p>XP Total</p>
         </div>
       </ion-col>
-      <ion-col>
+      <ion-col size="6">
         <div class="stat-box">
+          <ion-icon name="checkmark-done-circle" color="success"></ion-icon>
           <h1>{{ stats.stats.completedMissions }}</h1>
           <p>Misiones Cumplidas</p>
         </div>
       </ion-col>
     </ion-row>
+    
   </ion-grid>
 
-  <ion-button color="danger" expand="block" class="ion-margin-top" (click)="logout()">
-    Cerrar Sesión
-  </ion-button>
+  <div class="logout-container">
+    <ion-button color="danger" expand="block" class="btn-logout" (click)="logout()">
+      <ion-icon name="log-out-outline" slot="start"></ion-icon>
+      Cerrar Sesión
+    </ion-button>
+  </div>
 
 </ion-content>

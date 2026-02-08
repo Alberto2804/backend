@@ -31,6 +31,12 @@
   align-items: center;
   margin-bottom: 8px;
 }
+ion-card-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffffff !important; /* <--- Esto lo hace visible */
+  margin-top: 5px;
+}
 
 .reward {
   color: #f1c40f; /* Dorado */
@@ -57,4 +63,30 @@
   margin-top: 50px;
   color: #555;
   ion-icon { font-size: 64px; margin-bottom: 10px; }
+}
+/* Estilo del Avatar Redondo en la cabecera */
+.profile-avatar-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid white;
+  margin-right: 10px;
+  cursor: pointer;
+  img { width: 100%; height: 100%; object-fit: cover; }
+}
+
+/* Ajuste fino para las barras de herramientas */
+.search-toolbar, .segment-toolbar {
+  --background: #1e1e1e; // Color de fondo de tarjeta
+  padding-bottom: 5px;
+}
+
+ion-searchbar {
+  --background: #2a2a2a;
+  --color: white;
+  --icon-color: var(--ion-color-primary);
+  --placeholder-color: #888;
+  border-radius: 20px;
+  margin-top: 5px;
 }

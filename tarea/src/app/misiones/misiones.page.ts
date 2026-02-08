@@ -19,6 +19,8 @@ export class MisionesPage implements OnInit {
   filteredMissions: Mission[] = [];
   segmentValue = 'DISPONIBLE'; 
   myRank: string = 'Genin';
+  searchText = '';
+  
 
   constructor(
     private missionService: MissionService,
@@ -48,8 +50,17 @@ export class MisionesPage implements OnInit {
   }
 
   
-  filterMissions() {
-    this.filteredMissions = this.missions.filter(m => m.status === this.segmentValue);
+ filterMissions() {
+    const query = this.searchText.toLowerCase();
+
+    this.filteredMissions = this.missions.filter(m => {
+      const matchesStatus = m.status === this.segmentValue;
+      
+      const matchesSearch = m.title.toLowerCase().includes(query) || 
+                            m.description.toLowerCase().includes(query);
+
+      return matchesStatus && matchesSearch;
+    });
   }
 
   

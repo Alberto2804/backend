@@ -6,6 +6,7 @@ import { AuthService } from '../auth';
 import { MissionService } from '../mision-service';
 import { NinjaStats } from '../interfaces';
 
+
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.page.html',
